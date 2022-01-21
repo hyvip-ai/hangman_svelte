@@ -1,21 +1,30 @@
-<div class="lds-spinner">
-  <div />
-  <div />
-  <div />
-  <div />
-  <div />
-  <div />
-  <div />
-  <div />
-  <div />
-  <div />
-  <div />
-  <div />
+<div class="outer">
+  <div class="lds-spinner">
+    <div />
+    <div />
+    <div />
+    <div />
+    <div />
+    <div />
+    <div />
+    <div />
+    <div />
+    <div />
+    <div />
+    <div />
+  </div>
+  <h1>Please Wait Game is Loading...</h1>
 </div>
-<h1>Please Wait Game is Loading...</h1>
+
 <style>
+  .outer{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+  }
   .lds-spinner {
-    color: official;
     display: inline-block;
     position: relative;
     width: 80px;
