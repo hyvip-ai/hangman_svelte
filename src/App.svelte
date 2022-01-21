@@ -8,8 +8,12 @@
   import Loader from "./components/Loader.svelte";
   let mainWord = "";
   let wrongWords = [];
+
   $: correctWords = mainWord.split("");
-  let lifeCount = 7;
+  $: enteredWords = [
+    correctWords[Math.floor(correctWords.length * Math.random())],
+  ];
+  let lifeCount = 5;
   let gameOver = false;
   let loading = true;
   onMount(async () => {
@@ -23,19 +27,38 @@
   window.addEventListener("keyup", (e) => {
     const { key, keyCode } = e;
     if (keyCode >= 65 && keyCode <= 90) {
-      console.log(key);
-      if (lifeCount > 0) {
-        lifeCount -= 1;
+      if (correctWords.includes(key)) {
+        if (enteredWords.includes(key)) {
+          alert("The word is already entered try soemthing else moron !!!!");
+        } else {
+          enteredWords = [key, ...enteredWords];
+        }
       } else {
-        gameOver = true;
+        wrongWords = [key, ...wrongWords];
+        if (lifeCount > 0) {
+          lifeCount -= 1;
+          console.log(lifeCount);
+        } else {
+          gameOver = true;
+        }
       }
     }
   });
-  const resetGame = () => {
-    lifeCount = 7;
-    correctWords = [];
-    wrongWords = [];
+  const resetGame = async () => {
     gameOver = false;
+    setTimeout(async () => {
+      loading = true;
+      lifeCount = 5;
+      correctWords = [];
+      wrongWords = [];
+
+      let result = await fetch(
+        `https://random-word-api.herokuapp.com/word?number=1`
+      );
+      let data = await result.json();
+      mainWord = data[0];
+      loading = false;
+    }, 50);
   };
 </script>
 
@@ -49,7 +72,7 @@
     <Life {lifeCount} />
     <GameOver {gameOver} on:start-new-game={resetGame} />
     {#if correctWords.length}
-      <CorrectWord {correctWords} />
+      <CorrectWord {correctWords} {enteredWords} />
     {/if}
   {/if}
 </main>
