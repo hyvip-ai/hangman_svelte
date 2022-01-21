@@ -8,7 +8,6 @@
   }
 </script>
 
-<main>
   {#if win}
     <main class="backdrop">
       <div class="main_content" transition:scale>
@@ -17,7 +16,7 @@
       </div>
     </main>
   {/if}
-</main>
+
 
 <style>
   .backdrop {

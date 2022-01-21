@@ -1,6 +1,5 @@
 <script>
   import GameOver from "./components/GameOver.svelte";
-  import { onMount } from "svelte";
   import HangMan from "./components/HangMan.svelte";
   import Life from "./components/Life.svelte";
   import WrongWord from "./components/WrongWord.svelte";
@@ -16,15 +15,15 @@
   ];
   let lifeCount = 5;
   let gameOver = false;
-  let loading = true;
-  onMount(async () => {
-    let result = await fetch(
-      `https://random-word-api.herokuapp.com/word?number=1`
-    );
-    let data = await result.json();
-    mainWord = data[0];
-    loading = false;
-  });
+
+  const fetchData = async() => {
+    const data = await fetch(`https://random-word-api.herokuapp.com/word?number=1`)
+    const res = await data.json()
+      mainWord = res[0];
+      return mainWord
+  };
+
+  let loading = fetchData()
   const checkWin = () => {
     return mainWord.split("").every((item) => {
       return enteredWords.includes(item);
@@ -53,27 +52,17 @@
   const resetGame = async () => {
     win = false;
     gameOver = false;
-
-    setTimeout(async () => {
-      loading = true;
-      lifeCount = 5;
-      correctWords = [];
-      wrongWords = [];
-
-      let result = await fetch(
-        `https://random-word-api.herokuapp.com/word?number=1`
-      );
-      let data = await result.json();
-      mainWord = data[0];
-      loading = false;
-    }, 100);
+    console.log("Reset Game Works");
+    loading = fetchData();
+    lifeCount = 5;
+    wrongWords = [];
   };
 </script>
 
-<main>
-  {#if loading}
-    <Loader />
-  {:else}
+{#await loading}
+  <Loader />
+{:then}
+  <main>
     <h1>Welcome To Hangman Game !</h1>
     <HangMan {wrongWords} />
     <WrongWord {wrongWords} />
@@ -83,8 +72,8 @@
     {#if correctWords.length}
       <CorrectWord {correctWords} {enteredWords} />
     {/if}
-  {/if}
-</main>
+  </main>
+{/await}
 
 <style>
   main {

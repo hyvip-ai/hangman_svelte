@@ -23,6 +23,11 @@
     position: fixed;
     z-index: 999;
     left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #34495e;
+    flex-direction: column;
   }
   .lds-spinner {
     display: inline-block;
