@@ -2,21 +2,20 @@
   export let win = false;
   import { scale } from "svelte/transition";
   import { createEventDispatcher } from "svelte";
-  const dispatch = createEventDispatcher()
-  const clickHandler = ()=>{
-    dispatch('win-game')
-  }
+  const dispatch = createEventDispatcher();
+  const clickHandler = () => {
+    dispatch("win-game");
+  };
 </script>
 
-  {#if win}
-    <main class="backdrop">
-      <div class="main_content" transition:scale>
-        <p class="message">Congratulations, You Win</p>
-        <button on:click={clickHandler}>Start Again</button>
-      </div>
-    </main>
-  {/if}
-
+{#if win}
+  <main class="backdrop">
+    <div class="main_content" transition:scale>
+      <p class="message">Congratulations, You Win</p>
+      <button on:click={clickHandler}>Start Again</button>
+    </div>
+  </main>
+{/if}
 
 <style>
   .backdrop {

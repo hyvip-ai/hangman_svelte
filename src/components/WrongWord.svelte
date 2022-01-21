@@ -1,6 +1,5 @@
 <script>
   import { v4 as uuid } from "uuid";
-
   export let wrongWords = [];
 </script>
 

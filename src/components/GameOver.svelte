@@ -1,11 +1,11 @@
 <script>
   import { scale } from "svelte/transition";
-  import {createEventDispatcher} from 'svelte'
-  const dispatch = createEventDispatcher()
+  import { createEventDispatcher } from "svelte";
+  const dispatch = createEventDispatcher();
   export let gameOver = false;
-  const clickHandler = ()=>{
-    dispatch("start-new-game")
-  }
+  const clickHandler = () => {
+    dispatch("start-new-game");
+  };
 </script>
 
 <div>

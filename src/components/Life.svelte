@@ -6,7 +6,7 @@
 
 <main>
   <h3>Life Reamining</h3>
-  {#if lifeCount===0}
+  {#if lifeCount === 0}
     <p>Last Chance</p>
   {/if}
   {#each lifeCountArray as life (life)}

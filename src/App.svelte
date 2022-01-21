@@ -16,14 +16,16 @@
   let lifeCount = 5;
   let gameOver = false;
 
-  const fetchData = async() => {
-    const data = await fetch(`https://random-word-api.herokuapp.com/word?number=1`)
-    const res = await data.json()
-      mainWord = res[0];
-      return mainWord
+  const fetchData = async () => {
+    const data = await fetch(
+      `https://random-word-api.herokuapp.com/word?number=1`
+    );
+    const res = await data.json();
+    mainWord = res[0];
+    return mainWord;
   };
 
-  let loading = fetchData()
+  let loading = fetchData();
   const checkWin = () => {
     return mainWord.split("").every((item) => {
       return enteredWords.includes(item);
@@ -52,7 +54,6 @@
   const resetGame = async () => {
     win = false;
     gameOver = false;
-    console.log("Reset Game Works");
     loading = fetchData();
     lifeCount = 5;
     wrongWords = [];

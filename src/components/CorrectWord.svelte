@@ -2,7 +2,6 @@
   import { v4 as uuid } from "uuid";
   export let correctWords = [];
   export let enteredWords = [];
-  console.log(correctWords);
 </script>
 
 <main>
