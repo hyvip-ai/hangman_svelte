@@ -70,9 +70,9 @@
     <Life {lifeCount} />
     <GameOver {gameOver} on:start-new-game={resetGame} />
     <Win on:win-game={resetGame} {win} />
-    {#if correctWords.length}
+    {#key enteredWords}
       <CorrectWord {correctWords} {enteredWords} />
-    {/if}
+    {/key}
   </main>
 {/await}
 
